@@ -1,27 +1,19 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { LoginScreenNavigation } from "../types/RootStack";
 
-const Home = ({ route, navigation }) => {
-  // Assuming you have user information and token details in the route params
-  //   const { username, virtualToken } = route.params;
-
+const HomeScreen = () => {
+  const navigation = useNavigation<LoginScreenNavigation>();
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.welcomeText}>Welcome, {username}!</Text> */}
-
       <View style={styles.tokenContainer}>
         <Text style={styles.tokenLabel}>Virtual Token:</Text>
-        {/* <Text style={styles.tokenValue}>{virtualToken}</Text> */}
       </View>
-
-      {/* Your Home Page Content */}
-
       <Button
         title="Logout"
         onPress={() => {
-          // Assuming you have a logout function to clear authentication state
-          // You should implement the logout logic based on your authentication setup
-          // For example, using context or global state management
           navigation.navigate("Login"); // Navigate to the login screen after logout
         }}
       />
@@ -54,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;
