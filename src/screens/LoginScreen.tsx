@@ -11,6 +11,7 @@ const LoginScreen = () => {
   const navigation = useNavigation<HomeScreenNavigation>();
   const handleLogin = async () => {
     const navigate: boolean = await loginService(username, password);
+    console.log(navigate);
     if (navigate) navigation.navigate("Home");
   };
 

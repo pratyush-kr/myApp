@@ -1,5 +1,4 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { LoginScreenNavigation } from "../types/RootStack";
