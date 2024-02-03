@@ -7,10 +7,10 @@ export const loginService = async (username: string, password: string) => {
     password: password,
   };
   try {
-    const response = await axios.post<CommonResponse>("http://192.168.1.5:8080/user/login", data);
+    const response = await axios.post<CommonResponse>(`${process.env.EXPO_PUBLIC_API_URL}/user/login`, data);
     return response.data.responseData.success;
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.log(JSON.stringify(err));
   }
   return false;
 };
