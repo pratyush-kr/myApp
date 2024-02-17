@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { LoginScreenNavigation } from "../types/RootStack";
+import useLoginStorage from "../service/UseLoginStorage";
 
 const HomeScreen = () => {
   const navigation = useNavigation<LoginScreenNavigation>();
@@ -12,7 +13,9 @@ const HomeScreen = () => {
       </View>
       <Button
         title="Logout"
-        onPress={() => {
+        onPress={async () => {
+          const { deleteValue } = await useLoginStorage();
+          await deleteValue();
           navigation.navigate("Login"); // Navigate to the login screen after logout
         }}
       />

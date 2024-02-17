@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { loginService } from "../service/UserService";
 import { HomeScreenNavigation } from "../types/RootStack";
+import useLoginStorage from "../service/UseLoginStorage";
 
 const LoginScreen = () => {
   // Refs to store the username and password input values
@@ -11,9 +12,25 @@ const LoginScreen = () => {
   const navigation = useNavigation<HomeScreenNavigation>();
   const handleLogin = async () => {
     const navigate: boolean = await loginService(username, password);
-    if (navigate) navigation.navigate("Home");
-  };
 
+    if (navigate) {
+      navigation.navigate("Home");
+    }
+  };
+  useEffect(() => {
+    const loader = async () => {
+      const { readValue, saveValue } = await useLoginStorage();
+      const token = await readValue();
+      if (token != null) {
+        navigation.navigate("Home");
+      }
+      console.log("Token:", token);
+    };
+    const unsubscribe = navigation.addListener("focus", () => {
+      loader();
+    });
+    return unsubscribe;
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Login</Text>

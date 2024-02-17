@@ -1,3 +1,4 @@
+import Token from "./Token";
 import user from "./User";
 
 export default interface ResponseData {
@@ -6,4 +7,5 @@ export default interface ResponseData {
   userId: number;
   success: boolean;
   users: user[];
+  token: Token;
 }
